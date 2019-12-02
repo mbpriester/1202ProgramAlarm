@@ -49,6 +49,7 @@ class Main {
             return inputList.get(0);
           }
         }
+       System.out.println("Output value now: " +inputList.get(outputPosition));
       }
       return inputList.get(0);
     } catch (IOException ex){
