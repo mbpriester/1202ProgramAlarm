@@ -17,41 +17,49 @@ class Main {
     System.out.println(zerothPosition(new FileReader("./input.txt")));
   }
 
-  private static Integer zerothPosition(FileReader inputFile){
+  public static Integer zerothPosition(FileReader inputFile){
     try {
       BufferedReader reader = new BufferedReader(inputFile);
       String line = reader.readLine();
 
       List<Integer> inputList = setupIntcodeList(line);
 
-      inputList.set(1, 12);
-      inputList.set(2, 2);
-
       for(int j = 0; j < inputList.size(); j+=4){
+        inputList.set(1, 12);
+        inputList.set(2, 2);
         int opCode = inputList.get(j);
-        int input1 = inputList.get(j+1);
-        int input2 = inputList.get(j+2);
-        int outputPosition = inputList.get(j+3);
 
+        if(opCode == STOP){
+          for(Integer i : inputList){
+            System.out.print(""+i+",");
+          }
+          return inputList.get(0);
+        }
+
+        int input1 = inputList.get(inputList.get(j+1));
+        int input2 = inputList.get(inputList.get(j+2));
+        int outputPositionValue = inputList.get(j+3);
+        
         switch(opCode){
           case ADD:
           {
-            inputList.set(outputPosition, input1 + input2);
+            inputList.set(outputPositionValue, input1 + input2);
             break;
           }
           case MULTIPLY: 
           {
-            inputList.set(outputPosition, input1 * input2);
+            inputList.set(outputPositionValue, input1 * input2);
             break;
           }
           case STOP:
           {
+            for(Integer i : inputList){
+              System.out.print(""+i+",");
+            }
             return inputList.get(0);
           }
         }
-       System.out.println("Output value now: " +inputList.get(outputPosition));
       }
-      return inputList.get(0);
     } catch (IOException ex){
       ex.getMessage();
     }     
@@ -61,8 +69,9 @@ class Main {
   private static List<Integer> setupIntcodeList(String line){
     List<Integer> intCodeList = new ArrayList<>();
     String[] input = line.split(",");
-    for(String i : input){
-      intCodeList.add(Integer.valueOf(i));
+
+    for(String ints : input){
+      intCodeList.add(Integer.valueOf(ints));
     }
     return intCodeList;
   }
