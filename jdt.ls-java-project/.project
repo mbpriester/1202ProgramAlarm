@@ -20,10 +20,5 @@
 			<type>1</type>
 			<location>//home/runner/Main.java</location>
 		</link>
-		<link>
-			<name>src/MainTest.java</name>
-			<type>1</type>
-			<location>//home/runner/MainTest.java</location>
-		</link>
 	</linkedResources>
 </projectDescription>

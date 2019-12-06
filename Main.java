@@ -25,14 +25,11 @@ class Main {
       List<Integer> inputList = setupIntcodeList(line);
 
       for(int j = 0; j < inputList.size(); j+=4){
-        inputList.set(1, 12);
-        inputList.set(2, 2);
+        inputList.set(1, 80);
+        inputList.set(2, 18);
         int opCode = inputList.get(j);
 
         if(opCode == STOP){
-          for(Integer i : inputList){
-            System.out.print(""+i+",");
-          }
           return inputList.get(0);
         }
 
